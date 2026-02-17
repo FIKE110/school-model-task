@@ -120,6 +120,27 @@ mvn test -X
 mvn clean test
 ```
 
+### Run the Demonstration
+```bash
+# Run the Main class demonstration
+mvn compile exec:java -Dexec.mainClass="com.school.Main"
+
+# Or package and run
+mvn clean package
+java -cp target/week1-task-school-1.0-SNAPSHOT.jar com.school.Main
+```
+
+The demonstration will:
+1. Create a school with staff (Principal, Teachers, Non-Academic Staff)
+2. Set up courses (Math, Science, English)
+3. Create grade-level classes
+4. Process student admissions with age validation
+5. Assign teachers to courses and classes
+6. Enroll students in classes
+7. Show teachers performing duties
+8. Demonstrate student expulsion
+9. Display school statistics
+
 ### Test Results
 ```
 Tests run: 131, Failures: 0, Errors: 0, Skipped: 0
@@ -147,7 +168,7 @@ All tests pass, covering:
 - **Immutability**: `final` for IDs and constants
 - **Validation**: Input validation in constructors and setters
 - **Documentation**: Single-line comments on classes and methods
-- **Testing**: TDD approach with 39 comprehensive tests
+- **Testing**: TDD approach with 131 comprehensive tests
 
 ## Example Usage
 
