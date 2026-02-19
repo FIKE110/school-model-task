@@ -3,9 +3,6 @@ package com.school;
 import com.school.model.*;
 import com.school.service.School;
 
-/**
- * Main entry point demonstrating the School Management System
- */
 public class Main {
 
     public static void main(String[] args) {
@@ -13,39 +10,20 @@ public class Main {
         System.out.println("   SCHOOL MANAGEMENT SYSTEM DEMONSTRATION");
         System.out.println("==========================================\n");
 
-        // Create a new school
         School springfieldHigh = new School("Springfield High School");
         System.out.println("Created: " + springfieldHigh.getName());
         System.out.println();
 
-        // Setup school staff
         setupStaff(springfieldHigh);
-
-        // Setup courses
         setupCourses(springfieldHigh);
-
-        // Setup classes
         setupClasses(springfieldHigh);
-
-        // Process applicants and admit students
         processAdmissions(springfieldHigh);
-
-        // Assign teachers to courses
         assignCourses(springfieldHigh);
-
-        // Enroll students in classes
         enrollStudents(springfieldHigh);
-
-        // Demonstrate teaching
         demonstrateTeaching(springfieldHigh);
-
-        // Show school statistics
         showStatistics(springfieldHigh);
-
-        // Demonstrate expulsion
         demonstrateExpulsion(springfieldHigh);
 
-        // Show final statistics
         System.out.println("\n==========================================");
         System.out.println("   FINAL SCHOOL STATISTICS");
         System.out.println("==========================================");
@@ -55,13 +33,11 @@ public class Main {
     private static void setupStaff(School school) {
         System.out.println("--- Setting Up Staff ---");
 
-        // Principal
         Principal principal = new Principal("PRN001", "Dr. Sarah Anderson", 52, "Administration");
         principal.setSalary(120000);
         school.addStaff(principal);
         System.out.println("✓ Principal: " + principal.getName());
 
-        // Teachers
         Teacher mathTeacher = new Teacher("TCH001", "Mr. Robert Johnson", 45, "Mathematics");
         mathTeacher.setSalary(65000);
         school.addStaff(mathTeacher);
@@ -77,7 +53,6 @@ public class Main {
         school.addStaff(englishTeacher);
         System.out.println("✓ Teacher: " + englishTeacher.getName() + " (" + englishTeacher.getDepartment() + ")");
 
-        // Non-academic staff
         NonAcademicStaff librarian = new NonAcademicStaff("NAC001", "James Wilson", 35, "Librarian");
         librarian.setSalary(40000);
         school.addStaff(librarian);
@@ -144,7 +119,6 @@ public class Main {
 
         Principal principal = school.getPrincipal();
 
-        // Successful admissions
         Applicant[] successfulApplicants = {
             new Applicant("APP001", "Alice Johnson", 14),
             new Applicant("APP002", "Bob Smith", 15),
@@ -157,14 +131,13 @@ public class Main {
         for (Applicant applicant : successfulApplicants) {
             try {
                 Student student = principal.admit(applicant, school);
-                System.out.println("✓ Admitted: " + applicant.getName() + " (Age: " + applicant.getAge() + 
+                System.out.println("✓ Admitted: " + applicant.getName() + " (Age: " + applicant.getAge() +
                     ") -> Student ID: " + student.getId());
             } catch (IllegalArgumentException e) {
                 System.out.println("✗ Rejected: " + applicant.getName() + " - " + e.getMessage());
             }
         }
 
-        // Failed admission (too young)
         System.out.println("\n--- Testing Age Restrictions ---");
         Applicant tooYoung = new Applicant("APP007", "Young Kid", 5);
         try {
@@ -174,7 +147,6 @@ public class Main {
                 ") - " + e.getMessage());
         }
 
-        // Failed admission (too old)
         Applicant tooOld = new Applicant("APP008", "Old Student", 25);
         try {
             principal.admit(tooOld, school);
@@ -221,7 +193,6 @@ public class Main {
     private static void enrollStudents(School school) {
         System.out.println("--- Enrolling Students in Classes ---");
 
-        // Get teachers and classes
         Teacher mathTeacher = null;
         Teacher scienceTeacher = null;
 
@@ -240,7 +211,6 @@ public class Main {
         SchoolClass grade9B = findClass(school, "Grade 9B");
         SchoolClass grade10A = findClass(school, "Grade 10A");
 
-        // Assign teachers to classes
         if (mathTeacher != null && grade9A != null) {
             school.assignTeacherToClass(mathTeacher, grade9A);
             System.out.println("✓ " + mathTeacher.getName() + " assigned as teacher for " + grade9A.getName());
@@ -251,7 +221,6 @@ public class Main {
             System.out.println("✓ " + scienceTeacher.getName() + " assigned as teacher for " + grade9B.getName());
         }
 
-        // Enroll students
         int studentCount = 0;
         for (Student student : school.getStudents()) {
             SchoolClass targetClass;
@@ -295,7 +264,6 @@ public class Main {
             principal.expel(studentToExpel, school);
             System.out.println();
 
-            // Try to expel same student again (should fail)
             System.out.println("--- Attempting to Expel Non-existent Student ---");
             try {
                 principal.expel(studentToExpel, school);
@@ -319,7 +287,6 @@ public class Main {
             System.out.println("  Principal: " + principal.getName());
         }
 
-        // Show class details
         System.out.println("\nClass Details:");
         for (SchoolClass schoolClass : school.getClasses()) {
             System.out.println("  " + schoolClass.getName() + ":");
@@ -330,7 +297,6 @@ public class Main {
         }
     }
 
-    // Helper methods
     private static Course findCourse(School school, String code) {
         for (Course course : school.getCourses()) {
             if (course.getCode().equals(code)) {
