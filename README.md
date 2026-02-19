@@ -201,17 +201,6 @@ school.enrollStudentInClass(student, grade10);
 student.takeCourse(math);
 ```
 
-## Future Enhancements
-
-- Add grade/assessment system
-- Implement attendance tracking
-- Add course scheduling with time slots
-- Persistence layer with database
-- REST API for external integration
-
-## License
-
-This project is for educational purposes.
 
 ---
 
